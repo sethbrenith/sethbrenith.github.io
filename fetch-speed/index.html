@@ -1,0 +1,43 @@
+<script>
+navigator.serviceWorker.register("/sw.js").then(reg => {
+  var fetchCount = 0;
+  var fetchesInProgress = [];
+  var previous = 0;
+  var times = [];
+  function f() {
+    var now = Date.now();
+    if (fetchCount === 100000) {
+      var total = 0;
+      for (var i = 0; i < 10; ++i) {
+        total += times[i];
+      }
+      var startSpeed = 1000 / (total / 1000);
+      total = 0;
+      for (var i = times.length - 10; i < times.length; ++i) {
+        total += times[i];
+      }
+      var endSpeed = 1000 / (total / 1000);
+      window.document.getElementById("output").textContent = "Done. Average speed near start: " + startSpeed.toFixed() + " fetches/sec. Average speed near end: " + endSpeed.toFixed() + " fetches/sec.";
+      return;
+    }
+    window.setTimeout(f, 0);
+    if (!reg.active) {
+      console.log("waiting...");
+      return;
+    }
+    for (var i = 0; i < 100; ++i) {
+      ++fetchCount;
+      fetchesInProgress.push(window.fetch("leave-pending-" + fetchCount));
+    }
+    window.document.getElementById("doneCount").textContent = "" + fetchCount;
+    if (previous !== 0) {
+      times.push(now - previous);
+    }
+    previous = now;
+  }
+  window.setTimeout(f, 0);
+});
+</script>
+<p>This page initiates 100,000 fetch() requests in batches of 100, to see whether the
+main thread slows down when many fetches are already in progress.</p>
+<p id="output">Collecting timings. Please keep page visible. <span id="doneCount">0</span>/100000</p>
