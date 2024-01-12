@@ -4,7 +4,7 @@ When you take a heap snapshot in the Chrome DevTools, the default view for exami
 
 ## `(array)`
 
-This category includes various internal array-like objects which don't directly correspond to objects visible from JavaScript. For example, the contents of JavaScript `Array` objects are stored in a secondary internal object, to allow easy resizing.
+This category includes various internal array-like objects which don't directly correspond to objects visible from JavaScript. For example, the contents of JavaScript `Array` objects are stored in a secondary internal object named `(object elements)[]`, to allow easy resizing. ***TODO:**: If [my proposal for treating backing storage as part of the object](https://docs.google.com/document/d/1To-QPe4sNwn-AOpsiIaftdlXrJIm26QJgi2dBVrlDd4/edit?usp=sharing) is accepted, add advice here and in the "system" category below to try the new feature.*
 
 ## `(compiled code)`
 
