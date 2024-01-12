@@ -4,7 +4,7 @@ When you take a heap snapshot in the Chrome DevTools, the default view for exami
 
 ## `(array)`
 
-This category includes various internal array-like objects which don't directly correspond to objects visible from JavaScript. For example, the contents of JavaScript `Array` objects are stored in a secondary internal object named `(object elements)[]`, to allow easy resizing. ***TODO:**: If [my proposal for treating backing storage as part of the object](https://docs.google.com/document/d/1To-QPe4sNwn-AOpsiIaftdlXrJIm26QJgi2dBVrlDd4/edit?usp=sharing) is accepted, add advice here and in the "system" category below to try the new feature.*
+This category includes various internal array-like objects which don't directly correspond to objects visible from JavaScript. For example, the contents of JavaScript `Array` objects are stored in a secondary internal object named `(object elements)[]`, to allow easy resizing. ***TODO:** If [my proposal for treating backing storage as part of the object](https://docs.google.com/document/d/1To-QPe4sNwn-AOpsiIaftdlXrJIm26QJgi2dBVrlDd4/edit?usp=sharing) is accepted, add advice here and in the "system" category below to try the new feature.*
 
 ## `(compiled code)`
 
@@ -29,7 +29,7 @@ As described at [Fast Properties in V8](https://v8.dev/blog/fast-properties), V8
 
 ## `(sliced string)`
 
-When V8 needs to take a substring, such as when JavaScript calls String.prototype.substr, it may choose to allocate a "sliced string" object rather than copying all of the relevant characters from the original string. This object contains a pointer to the original string and describes which range of characters from the original string to use. From the perspective of JavaScript code, these are just normal strings, and they behave like any other string.
+When V8 needs to take a substring, such as when JavaScript code calls [`String.prototype.substring`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring), V8 may choose to allocate a "sliced string" object rather than copying all of the relevant characters from the original string. This new object contains a pointer to the original string and describes which range of characters from the original string to use. From the perspective of JavaScript code, these are just normal strings, and they behave like any other string. If a sliced string is retaining a lot of memory, then the program may have triggered [Issue 2869: Substring of huge string retains huge string in memory](https://bugs.chromium.org/p/v8/issues/detail?id=2869), and might benefit from taking deliberate steps to "flatten" the sliced string.
 
 ## `system / Context`
 
