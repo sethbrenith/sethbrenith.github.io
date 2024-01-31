@@ -4,7 +4,7 @@ When you take a heap snapshot in the Chrome DevTools, the default view for exami
 
 ## `(array)`
 
-This category includes various internal array-like objects which don't directly correspond to objects visible from JavaScript. For example, the contents of JavaScript `Array` objects are stored in a secondary internal object named `(object elements)[]`, to allow easy resizing. Similarly, the named properties in JavaScript objects are often stored in secondary internal objects named `(object properties)[]`, which are also listed in the `(array)` category. DevTools has an option to treat most of these internal arrays as if they were part of the containing object, which can help make shallow sizes more meaningful in many cases: in the DevTools settings, under Experiments, check the box entitled "In heap snapshots, treat backing store size as part of the containing object."
+This category includes various internal array-like objects which don't directly correspond to objects visible from JavaScript. For example, the contents of JavaScript `Array` objects are stored in a secondary internal object named `(object elements)[]`, to allow easy resizing. Similarly, the named properties in JavaScript objects are often stored in secondary internal objects named `(object properties)[]`, which are also listed in the `(array)` category. Starting in Chrome version 123, DevTools has an option to treat most of these internal arrays as if they were part of the containing object, which can help make shallow sizes more meaningful in many cases: in the DevTools settings, under Experiments, check the box entitled "In heap snapshots, treat backing store size as part of the containing object."
 
 ## `(compiled code)`
 
